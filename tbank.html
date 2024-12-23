@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Копирование номера карты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* Медиазапрос для небольших экранов */
+        @media (max-width: 600px) {
+            p {
+                font-size: 20px;
+            }
+            button {
+                font-size: 20px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<p>Отправьте 1150 р. на карту Т-Банк:</p>
+<p id="card-number">2200 7009 8684 6391</p>
+<button onclick="copyCardNumber()">Скопировать номер карты</button>
+
+<script>
+function copyCardNumber() {
+    // Находим элемент с номером карты
+    var cardNumberElement = document.getElementById("card-number");
+    
+    // Создаем временный элемент input для копирования текста
+    var tempInput = document.createElement("input");
+    tempInput.style.position = "absolute";
+    tempInput.style.left = "-1000px";
+    tempInput.value = cardNumberElement.textContent;
+    document.body.appendChild(tempInput);
+    
+    // Выделяем и копируем текст
+    tempInput.select();
+    document.execCommand("copy");
+    
+    // Удаляем временный элемент
+    document.body.removeChild(tempInput);
+
+    // Уведомляем пользователя
+    alert("Номер карты скопирован в буфер обмена!");
+}
+</script>
+
+</body>
+</html>
